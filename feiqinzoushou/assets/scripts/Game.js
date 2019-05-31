@@ -332,7 +332,6 @@ cc.Class({
         this.room_player_num.string = res.msg.data.number + ''
     },
 
-    // 渲染Game筹码按钮
     on_pours_set_num: function () {
         // 渲染num
         conf.counter_data = Utils.on_sort_rank(conf.counter_data)
@@ -431,7 +430,6 @@ cc.Class({
         event.currentTarget.getComponent(cc.Sprite).spriteFrame = this.key_frame
     },
 
-    // 开奖转圈
     on_round_strat: function (res) {
         if (res.code !== 200) {
             cc.warn('通知本轮游戏结果 endRound 返回code出错啦！', res.code)
@@ -456,22 +454,17 @@ cc.Class({
 
         conf.win_zoo_list = res.data.rightBetsList // 保存开奖小动物信息
 
-        this.pour_btn_block.active = true // 投注屏蔽
-        this.sec_splash.active = false // 倒计时遮罩关闭
-        this.status_ui.active = true // 开奖打开
+        this.pour_btn_block.active = true
+        this.sec_splash.active = false
+        this.status_ui.active = true
         this.status_str.string = '开奖'
-        this.sec_node.active = false // 倒计时节点关闭
-        this.sec_str.string = '' // 倒计时文字清零
+        this.sec_node.active = false
+        this.sec_str.string = ''
 
-        // 小动物，总投注，投注列表归零
-        // this.zoo_bottom_node.getComponent('zooBottomMsg').on_clean_pour_list()
-
-        // 开始转圈
         if (res.data.showId < 1 || res.data.showId > 34) { // res.data.showId 1到34
             cc.warn(' ==== 开奖熟字不在1到34是: ', res.data.showId)
             return
         }
-        // 保存开奖id 1到34
         conf.end_zoo_id = res.data.showId
         this.end_index = Utils.on_return_zoo_index(res.data.showId)
         // this.end_index = Math.floor(res.data.showId - 1); // end_index 从0开始
@@ -516,7 +509,7 @@ cc.Class({
         }
         // end
 
-        this.v = 5000; // 开始的速度;
+        this.v = 5000;
         this.a_v = this.v / (this.road_path.length - 1);
         this.running_item.setPosition(this.road_path[0]);
         this.next_step = 1;
@@ -525,11 +518,10 @@ cc.Class({
 
     walk_to_next() {
         AudioManager.sfxPlay('round') // sfx
-
         if (this.next_step >= this.road_path.length) {
-            this.start_index = this.end_index; // 下一次开始的位置
-            this.is_running = false; // 动画结束
-            this.onShowBigZooIndex(conf.end_zoo_id); // 显示大动物 1到34
+            this.start_index = this.end_index;
+            this.is_running = false;
+            this.onShowBigZooIndex(conf.end_zoo_id);
             // 把[开奖]给屏蔽了
             this.status_ui.active = false
 
@@ -606,88 +598,87 @@ cc.Class({
         this.zoo_bottom_node.getComponent('zooBottomMsg').on_send_pour_list()
     },
 
-    onShowBigZooIndex: function (index) { // index 1到34
+    onShowBigZooIndex: function (index) {
         switch (index) {
-            case 1: // 银鲨
-            case 12: // 银鲨
-            case 18: // 银鲨
-            case 29: // 银鲨
-                this.onShowBigZoo(0); // 银鲨 => 0
+            case 1:
+            case 12:
+            case 18:
+            case 29:
+                this.onShowBigZoo(0);
             break;
 
-            case 2: // 燕子
-            case 3: // 燕子
-            case 4: // 燕子
-                this.onShowBigZoo(1); // 燕子 => 1
+            case 2:
+            case 3:
+            case 4:
+                this.onShowBigZoo(1);
             break;
 
-            case 9: // 狮子
-            case 10: // 狮子
-            case 11: // 狮子
-                this.onShowBigZoo(2); // 狮子 => 2
+            case 9:
+            case 10:
+            case 11:
+                this.onShowBigZoo(2);
             break;
 
-            case 13: // 熊猫
-            case 14: // 熊猫
-                this.onShowBigZoo(3); // 熊猫 => 3
+            case 13:
+            case 14:
+                this.onShowBigZoo(3);
             break;
             
-            case 15: // 金鲨
-            case 32: // 金鲨
-                this.onShowBigZoo(4); // 金鲨 => 4
+            case 15:
+            case 32:
+                this.onShowBigZoo(4);
             break;
             
-            case 16: // 猴子
-            case 17: // 猴子
-                this.onShowBigZoo(5); // 猴子 => 5
+            case 16:
+            case 17:
+                this.onShowBigZoo(5);
             break;
             
-            case 19: // 兔子
-            case 20: // 兔子
-            case 21: // 兔子
-                this.onShowBigZoo(6); // 兔子 => 6
+            case 19:
+            case 20:
+            case 21:
+                this.onShowBigZoo(6);
             break;
             
-            case 26: // 老鹰
-            case 27: // 老鹰
-            case 28: // 老鹰
-                this.onShowBigZoo(7); // 老鹰 => 7
+            case 26:
+            case 27:
+            case 28:
+                this.onShowBigZoo(7);
             break;
             
-            case 30: // 鸽子
-            case 31: // 鸽子
-                this.onShowBigZoo(8); // 鸽子 => 8
+            case 30:
+            case 31:
+                this.onShowBigZoo(8);
             break;
             
-            case 33: // 孔雀
-            case 34: // 孔雀
-                this.onShowBigZoo(9); // 孔雀 => 9
+            case 33:
+            case 34:
+                this.onShowBigZoo(9);
             break;
 
-            case 5: // 飞禽派对
-            case 22: // 飞禽派对
-                this.onShowBigZoo(10); // 飞禽派对 => 10           
+            case 5:
+            case 22:
+                this.onShowBigZoo(10);        
             break;
 
-            case 6: // 走兽派对
-            case 23: // 走兽派对
-                this.onShowBigZoo(11); // 走兽派对 => 11          
+            case 6:
+            case 23:
+                this.onShowBigZoo(11);        
             break;
 
-            case 7: // 鲨鱼狂潮
-            case 24: // 鲨鱼狂潮
-                this.onShowBigZoo(12); // 鲨鱼狂潮 => 12
+            case 7:
+            case 24:
+                this.onShowBigZoo(12);
             break;
 
-            case 8: // 至尊海陆空
-            case 25: // 至尊海陆空
-                this.onShowBigZoo(13); // 至尊海陆空 => 13
+            case 8:
+            case 25:
+                this.onShowBigZoo(13);
             break;
             
         }
     },
 
-    // 显示大动物
     onShowBigZoo: function (index) {
         this.scheduleOnce(function () {
             AudioManager.sfxPlay('award') // sfx
@@ -698,8 +689,7 @@ cc.Class({
         }.bind(this), 0.8)
     },
 
-    // 渲染总下注牌子
-    on_fresh_total_pour: function (key) { // 1渲染 -1归零 2复位
+    on_fresh_total_pour: function (key) {
         if (!key) {
             cc.log('渲染总下注牌子传的key出错啦~~')
             return
@@ -736,20 +726,17 @@ cc.Class({
             this.room_player_num.string = conf.room_player_num
             this.self_coin.string = conf.self_coin
 
-            // 渲染已经投注过的小动物
             if (Utils.on_list_is_empty(res.data.betsList) === -1) { // 所有小动物是空表
                 
-            } else { // 所有小动物不是空表
+            } else {
                 conf.total_pour_zoo_list = res.data.betsList // 之前所有玩家已经投注的小动物信息
                 // 渲染UI
                 for (var i in res.data.betsList) {
-                    // 渲染所有玩家小动物表
                     var t_coin = parseInt(conf.total_pour_zoo_list[i])
                     var c_coin = parseInt(res.data.betsList[i])
                     t_coin += c_coin
                     conf.total_pour_zoo_list[i] = t_coin
     
-                    // 渲染所有玩家小动物UI
                     var z_num = parseInt(i) - 1 + ''
                     this.zoo_bottom_node.children[z_num].getChildByName('bet').getChildByName('num').getComponent(cc.Label).string = t_coin + ''
                     
@@ -866,13 +853,9 @@ cc.Class({
     },
 
     onDestroy: function () {
-        // [cto] 撤销房间人数广播
         pomelo.off('roomNumberChange', this.on_room_peaple_num)
-        // [cto] 撤销新一轮监听
         pomelo.off('newRound', this.on_new_round)
-        // [cto] 撤销其他玩家下注广播
         pomelo.off('otherBitsList', this.on_pour_bc)
-        // [cto] 撤销转圈开奖
         pomelo.off('endRound', this.on_round_strat)
     }
 

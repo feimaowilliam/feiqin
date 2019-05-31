@@ -61,8 +61,8 @@ cc.Class({
 
     onLoad () {
         this.on_refresh()
-        this.type = '0' // 今天 3天内 本周
-        this.flag = null // 查看详情标志位 初始化为null
+        this.type = '0'
+        this.flag = null
     },
 
     start () {
@@ -70,45 +70,37 @@ cc.Class({
     },
 
     onEnable () {
-        this.flag = null // 查看详情标志位 初始化为null
+        this.flag = null
         this.on_refresh()
-        // 初始渲染 今天第一
         this.on_type_manager('call', '0')
-        // // 初始渲染 第一页
-        // this.page_edit.string = '1'
         
         // init
         this.page = 1
-        this.cur_page.string = '1' // 当前页
-        this.total_page.string = '1' // 总页数
+        this.cur_page.string = '1'
+        this.total_page.string = '1'
     },
 
-    // 下注记录type渲染
-    on_type_manager: function (event, index) { // 0今天 1近三天 2本周
+    on_type_manager: function (event, index) {
         if (!index) {
             return
         }
         if (event.type == 'touchend') {
             AudioManager.sfxPlay('btnclick') // sfx
         }
-        // 渲染按钮types
         for (var i in this.btn_types_Nodes) {
             this.btn_types_Nodes[i].color = this.non_color
         }
         this.btn_types_Nodes[index].color = this.key_color
-
-        // 存组件key
         this.type = index
         console.log('type是: ', this.type)
 
     },
 
-    // 查询
     on_search: function () {
-        AudioManager.sfxPlay('btn') // sfx
+        AudioManager.sfxPlay('btn')
         cc.log('====== 查询: ', this.type)
         var day_val = 0
-        switch (this.type) { // this.type 0今天 1近三天 2本周
+        switch (this.type) {
             case '0': day_val = 1; break
             case '1': day_val = 3; break
             case '2': day_val = 7; break
@@ -116,54 +108,32 @@ cc.Class({
         }
         cc.log(' ==== 下注记录 day_val: ', day_val)
         pomelo.request('game.betsHandler.betsLog', {page: this.page, day: day_val}, function (res) {
-            if (res.code === 200) { // 获取成功
+            if (res.code === 200) {
                 cc.log('**** ', res.msg)
                 var bet_logs = res.data.betsLogs
                 cc.log('==== 下注记录: ', bet_logs)
-
                 if (Utils.on_list_is_empty(bet_logs) === -1) {
-                    // 记录为空
                     Utils.on_show_dialog('没有下注记录')
                     return
                 }
 
                 // 清除数据
                 this.on_refresh()
-
-                for (var i in bet_logs) { // bet_logs []
+                for (var i in bet_logs) {
                     var bet_log = bet_logs[i]
                     // 生成预制体
                     var r_prefab = cc.instantiate(this.record_prefab)
-
-                    // 查看详情注册回调
                     this.on_prefab_callback(r_prefab, i)
 
-                    // data
                     var time = bet_log.create_time
                     var date_str = Utils.on_time_to_string(time)
                     r_prefab.getChildByName('date').getComponent(cc.Label).string = date_str + ''
 
-                    // 查询图
                     if (this.flag === i) {
                         r_prefab.getChildByName('btn_detail').getComponent(cc.Sprite).spriteFrame = this.record_detail_down
                     }
-
-                    // r_prefab.getChildByName('btn_detail').on('click', function () {
-                    //     this.flag = i
-                    //     cc.log('**** 当前查询是 ==== ', i)
-                    //     this.on_search()
-                    // }.bind(this))
-
-                    // 订单号 (要在详情才有)
-                    // r_prefab.getChildByName('num').getComponent(cc.Label).string = bet_log.id + ''
-
-                    // 玩法 (要在详情才有)
-
                     // 总投注
                     var betSum = bet_log.betSum
-                    // if (betSum >= 0) {
-                    //     betSum = '+' + betSum
-                    // }
                     r_prefab.getChildByName('pour_total').getComponent(cc.Label).string = betSum + ''
 
                     // 派彩
@@ -180,23 +150,11 @@ cc.Class({
                     s_num --
                     console.log('【【【【【', s_num)
                     r_prefab.getChildByName('result').getComponent(cc.Sprite).spriteFrame = this.zoo_result_frames[s_num]
-                    
                     this.record_content.addChild(r_prefab)
-
-                    /**
-                     * 查看详情
-                     * bet_log.bets_list 详情数组 (玩法,投注, 派彩)
-                     * date_str 日期
-                     * bet_log.id 订单号
-                     * bet_log.result_code 结果
-                     *  */
                     if (this.flag == i) {
                         this.on_search_detail(bet_log.bets_list, date_str, bet_log.round_id, bet_log.result_code)
                     }
                 }
-
-                // 底右页数显示
-                // this.on_page_str(res.data.count)
                 cc.log('==== 总页数: ', res.data.page)
                 this.total_page.string = res.data.page + '' // 总页数
 
@@ -219,13 +177,6 @@ cc.Class({
         }, this)
     },
 
-    /**
-     * 每项详情查询
-     * bets_list 详情数组 (玩法,投注, 派彩)
-     * date_str 日期
-     * odd_num 订单号
-     * result_code 结果
-     *  */
     on_search_detail: function (bets_list, date_str, odd_num, result_code) {
         for (var key in bets_list) { // bets_list 是{}
             var b_list = bets_list[key]
@@ -252,29 +203,28 @@ cc.Class({
         }
     },
 
-    // 页数显示
     on_page_str: function (count) {
-        var n = parseInt(count / 10) // 基数
-        var r = count % 10 // 余数
+        var n = parseInt(count / 10)
+        var r = count % 10
         if (r > 0) {
             n ++
         }
         if (n === 0 && r === 0) {
             this.page = 1
-            this.cur_page.string = '1' // 当前页
-            this.total_page.string = '1' // 总页数
+            this.cur_page.string = '1'
+            this.total_page.string = '1'
         } else {
-            this.cur_page.string = this.page + '' // 当前页
-            this.total_page.string = n + '' // 总页数
+            this.cur_page.string = this.page + ''
+            this.total_page.string = n + ''
         }
     },
 
     // page_button
-    on_page_button: function (event, key) { // key: -1上一页   1下一页
+    on_page_button: function (event, key) {
         if (!key) {
             return
         }
-        AudioManager.sfxPlay('btnclick') // sfx
+        AudioManager.sfxPlay('btnclick')
         if (key == '-1') {
             if (this.page === 1) {
                 cc.log('==== 已经是首页了哦O(∩_∩)O')
@@ -299,22 +249,10 @@ cc.Class({
         }
     },
 
-    // test
-    // tt: function () {
-    //     // test
-    //     var t_node = cc.instantiate(this.record_prefab)
-    //     // t_node.getChildByName('date').getComponent(cc.Label).string = 'BBOO'
-    //     this.record_content.children.splice(2, 0, t_node)
-    //     t_node._parent = this.record_content
-
-    //     console.log('info:', this.record_content)
-    // },
-
     onDisable: function () {
         this.flag = null
     },
 
-    // refresh
     on_refresh: function () {
         this.record_content.removeAllChildren()
     },

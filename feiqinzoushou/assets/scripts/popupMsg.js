@@ -30,7 +30,6 @@ cc.Class({
 
     },
 
-    // 弹窗的管理
     pop_up_window_show_hide: function (event, data_box) {
         AudioManager.sfxPlay('btn') // sfx
 

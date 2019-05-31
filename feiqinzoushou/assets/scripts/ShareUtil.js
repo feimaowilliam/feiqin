@@ -1,10 +1,3 @@
- /**
-     *  
-     * @param {*} userName 用户名称
-     * @param {*} link 链接
-     * @param {*} pngUrl 图片
-     * @param {*} desc 描述
-     */
 var ShareUtil = {
     share: function (userName, link, pngUrl, desc) {
         console.log("可以连接啦");

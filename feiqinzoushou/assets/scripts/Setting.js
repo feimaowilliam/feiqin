@@ -242,21 +242,18 @@ cc.Class({
             cc.log('请选择6个筹码啦啦~~')
             return
         }
-        conf.music_is_tak = this.music_is_tak // 音乐开关
-        conf.sfx_is_tak = this.sfx_is_tak;  // 音效开关
-        conf.music_volume = this.music_volume; // 音乐音量
-        conf.sfx_volume = this.sfx_volume; // 音效音量
-        conf.broadcast_is_tak = this.broadcast_is_tak; // 广播开关
-        conf.counter_data = Utils.on_sort_rank(this.counter_data) // 筹码数组
-
-        cc.sys.localStorage.setItem('musicTak', conf.music_is_tak) // 音乐开关
-        cc.sys.localStorage.setItem('sfxTak', conf.sfx_is_tak) // 音效开关
-        cc.sys.localStorage.setItem('musicVolume', conf.music_volume) // 音乐音量
-        cc.sys.localStorage.setItem('sfxVolume', conf.sfx_volume) // 音效音量
-        cc.sys.localStorage.setItem('broadcastSet', conf.broadcast_is_tak) // 广播开关
-        cc.sys.localStorage.setItem('counterData', JSON.stringify(conf.counter_data)) // 筹码数组
-
-        // 刷新game场景的筹码数组
+        conf.music_is_tak = this.music_is_tak
+        conf.sfx_is_tak = this.sfx_is_tak;
+        conf.music_volume = this.music_volume;
+        conf.sfx_volume = this.sfx_volume;
+        conf.broadcast_is_tak = this.broadcast_is_tak;
+        conf.counter_data = Utils.on_sort_rank(this.counter_data)
+        cc.sys.localStorage.setItem('musicTak', conf.music_is_tak)
+        cc.sys.localStorage.setItem('sfxTak', conf.sfx_is_tak)
+        cc.sys.localStorage.setItem('musicVolume', conf.music_volume)
+        cc.sys.localStorage.setItem('sfxVolume', conf.sfx_volume)
+        cc.sys.localStorage.setItem('broadcastSet', conf.broadcast_is_tak)
+        cc.sys.localStorage.setItem('counterData', JSON.stringify(conf.counter_data))
         this.game_scene_counter.on_pours_set_num()
 
         this.node.active = false
@@ -264,7 +261,7 @@ cc.Class({
 
     // 取消
     on_cancel: function () {
-        AudioManager.sfxPlay('btn') // sfx
+        AudioManager.sfxPlay('btn')
         if (conf.music_is_tak == false) {
             cc.audioEngine.setVolume(conf.bgmID, 0)
         } else {

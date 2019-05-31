@@ -24,19 +24,17 @@ cc.Class({
     // onLoad () {},
 
     start () {
-        this.on_reflash() // 清除数据
+        this.on_reflash()
     },
 
     onEnable () {
         pomelo.request('game.rankHandler.profit', {}, function (res) {
-            if (res.code === 200) { // 获取成功
-                // 清除数据
+            if (res.code === 200) {
                 this.on_reflash()
 
                 cc.log('**** ', res.msg)
                 var rank_list = res.data.rankList
                 for (var i in rank_list) { // []
-                    // 生成预制体
                     var r_prefab = cc.instantiate(this.rank_prefab)
 
                     if (i >= 0 && i <= 3) {

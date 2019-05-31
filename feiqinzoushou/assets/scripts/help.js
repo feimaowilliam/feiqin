@@ -4,21 +4,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
         scroll_target: {
             type: cc.PageView,
             default: null
@@ -53,13 +38,11 @@ cc.Class({
 
     },
     
-    // 滑向左
     on_left_page: function () {
         AudioManager.sfxPlay('btnclick') // sfx
         this.scroll_target.scrollToPage(0, 0.5)
     },
 
-    // 向右滑
     on_right_page: function () {
         AudioManager.sfxPlay('btnclick') // sfx
         this.scroll_target.scrollToPage(1, 0.5)

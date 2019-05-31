@@ -7,25 +7,10 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
-        is_local: true, // 本地打钩, 测试时候关掉
-        game_lobby_win_url: '', // 大厅win url
-        game_lobby_native_url: '', /// 大厅原生url
-        game_url: '', // 飞禽走兽连接不包token
+        is_local: true,
+        game_lobby_win_url: '',
+        game_lobby_native_url: '',
+        game_url: '',
         game_script: {
             type: Game,
             default: null,
@@ -131,20 +116,6 @@ cc.Class({
             cc.sys.localStorage.setItem('is_transfer', true)
             location.href = this.game_url + '?token=' + conf.token + ''
         })
-
-        // pomelo.on('close', function () {
-        //     console.log(' ****  **** close')
-        //     conf.is_connect = false // socket false
-        // })
-
-        // pomelo.on('disconnect', function () {
-        //     console.log(' ****  **** disconnect')
-        //     conf.is_connect = false // socket false
-        // })
-
-        // pomelo.on('heartbeat', function () {
-        //     console.log(' ****  **** heartbeat timeout')
-        // })
     },
 
     start () {
@@ -155,10 +126,6 @@ cc.Class({
     on_btn_back: function () {
         AudioManager.sfxPlay('btn') // sfx
 
-        // net test
-        // location.href = 'http://baidu.com'
-        // window.close()
-
         // 退出登录
         pomelo.request('game.roomHandler.out', function (res) {
             if (res.code === 200) { // 200
@@ -167,7 +134,7 @@ cc.Class({
                 // 跳转到大厅
                 if (cc.sys.os === cc.sys.OS_WINDOWS) { // window
                     location.href = this.game_lobby_win_url
-                } else { // cc.sys.OS_IOS, cc.sys.OS_ANDROID
+                } else {
                     location.href = this.game_lobby_native_url
                 }
             } else { // 500
