@@ -3,14 +3,10 @@ var ActionUtils = require('ActionUtils');
 var Utils = require('Utils');
 // var net = require("net");
 
-// 生成了一个类, 继承字 cc.Component 组件基类;
-// 时给自己的脑袋执行的;
-// 每行代码下去，你要知道意义是什么？
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        // 调试模式 => 声音
         isDebug: false,
         start_splash: {
             type: cc.Node,
@@ -149,10 +145,6 @@ cc.Class({
             conf.is_connect = false // socket false
         })
 
-        // pomelo.on('heartbeat', function () {
-        //     console.log('】】】】】】】 heartbeat timeout')
-        // })
-
         cc.game.on(cc.game.EVENT_HIDE, function () {
             console.log(' **** **** 切回后台--')
         });   
@@ -162,50 +154,8 @@ cc.Class({
             
             location.href = ''
 
-            // if (conf.is_connect) { // 处于连接
-            //     return
-            // }
-            // // 否则重连
-            // pomelo.init({host: conf.socketUrl, port: conf.socketPort}, function (res) {
-            //     console.log(' ******** 重连成功' )
-            //     // 重连操作
-            // })
-
-            // pomeloConnect(reIp, rePort, ()=>{
-            //     console.log('networkManger,123--重连成功---' )
-            //     const token = cc.sys.localStorage.getItem('nodeToken');
-            //     if(token){
-            //         pomeloRequest("connector.entryHandler.reconnect",{token:token},function (err,soData) {
-            //             cc.reconnectFun && cc.reconnectFun(err,soData);
-            //         });
-            //     }
-            // });
         })
 
-        // pomelo监听
-        // pomelo.on('entry', function (data) {
-        //     self.enterRoom(data);
-        // });
-
-        // // pomelo取消监听
-        // pomelo.off('entry', function (data) {
-        //     self.enterRoom(data);
-        // });
-
-        // pomelo请求
-        // self.chilpBox.getChildByName("nd_giveUp").on(cc.Node.EventType.TOUCH_END, function (event) {
-        //     let route = "game.gameHandler.giveUp";
-        //     pomelo.request(route, {}, function (data) {
-        //         console.log(data);
-        //         if (data.code == 200) {
-        //             console.log("拿到offer");
-        //         } else if (data.code == 500) {
-        //             console.log("争取拿到offer");
-        //         }
-        //     })
-        // }, this);
-
-        // 初始化conf配置信息 => setting
         this.set_init()
 
         // [cto] 房间人数广播
@@ -230,14 +180,8 @@ cc.Class({
             cc.warn(' *********** 关闭socket ')
             // self.disconnect(data);
         });
-
-        // cc.log('=======@@', conf.counter_data)
-        // cc.log('========@@@@@@@', cc.sys.localStorage.getItem('counterData'))
     },
 
-    // 引擎会调用 节点上的。组件实例.start方法;
-    // 开始运行之前调用一次，初始化入口的好地方;
-    // 初始化入口
     start () {
         if (this.isDebug) { // 声音
             this.start_splash.active = true
@@ -245,8 +189,6 @@ cc.Class({
             this.start_splash.active = false
         }
 
-        // this----> 组件实例, this.node ---> 组件实例所在的节点;
-        // 开始你的running item再哪个位置,随机生成一个位置;
         this.is_running = false;
         this.start_index = Math.random() * this.item_root.childrenCount;  // [0~28)
         this.start_index = Math.floor(this.start_index);
@@ -260,7 +202,6 @@ cc.Class({
         // 移除大动物
         this.big_zoo_content.removeAllChildren();
         // 初始化中间大动物
-        // this.onShowBigZooIndex(this.start_index);
     },
 
     // 初始化conf配置信息 => setting
@@ -438,7 +379,6 @@ cc.Class({
             return
         }
         cc.log(res.msg) // 开始新一轮游戏
-        // this.block_and_sec_node.active = true // 时间和遮罩总结点开关
 
         // top zoo flesh
         this.on_top_zoo_flash()
@@ -489,14 +429,6 @@ cc.Class({
             this.pours_node.children[i].getComponent(cc.Sprite).spriteFrame = this.non_frame
         }
         event.currentTarget.getComponent(cc.Sprite).spriteFrame = this.key_frame
-        // for (var i in this.pours_node.children) {
-        //     if (this.pours_node.children[i].getChildByName('num').getComponent(cc.Label).string == conf.pour_key) {
-        //         cc.log('======= 本地和localStorage已匹配, 投注的标号是: ', conf.pour_key)
-        //         this.pours_node.children[i].getComponent(cc.Sprite).spriteFrame = this.key_frame
-        //         break
-        //     }
-        // }
-
     },
 
     // 开奖转圈
@@ -549,20 +481,12 @@ cc.Class({
         this.show_anim_result();
         // 移除大动物
         this.big_zoo_content.removeAllChildren();
-
-        // william
-        // // 获得一个抽奖的结果, 服务器传给我们的，
-        // this.end_index = Math.random() * this.item_root.childrenCount;
-        // this.end_index = Math.floor(this.end_index);
-        // console.log("end: ", this.end_index + 1);
     },
 
     show_anim_result() {
         var round = Math.random() * 3 + 2; // 随机一个转的圈数;
         round = Math.floor(round); 
 
-        // 撸直了;
-        // 数组路径，for循环，循环的吧我们的环上的每个位置都push到 road_path里面来;
         this.road_path = []; 
 
         for(var j = 0; j < round; j ++) {
@@ -635,17 +559,6 @@ cc.Class({
                     }
                 }
             }.bind(this), 0.8)
-            // this.scheduleOnce(function () {
-            //     for (var i in conf.win_pkg) {
-            //         // william
-            //         if (conf.win_pkg[i].userId == conf.userId) { // 返金币给自己
-            //             // param1 开奖小动物数组  params2 true自己false玩家共同体   params3赢的金币
-            //             this.ActionComponent.on_coin_bigzoo_to_player(conf.win_zoo_list, true, conf.win_pkg[i].value)
-            //         } else { // 返金币给玩家共同体
-            //             this.ActionComponent.on_coin_bigzoo_to_player(conf.win_zoo_list, false, conf.win_pkg[i].value)
-            //         }
-            //     }
-            // }.bind(this), 0.8)
             return;
         }
 
@@ -691,18 +604,6 @@ cc.Class({
 
         // 向服务器提交自己下注列表请求
         this.zoo_bottom_node.getComponent('zooBottomMsg').on_send_pour_list()
-
-        // 总下注归零
-        // this.on_fresh_total_pour(-1) // 1加上去 -1 归零
-
-        // 获得一个抽奖的结果, 服务器传给我们的，
-        // this.end_index = Math.random() * this.item_root.childrenCount;
-        // this.end_index = Math.floor(this.end_index);
-        // console.log("end: ", this.end_index + 1);
-        // // end
-        // this.show_anim_result();
-        // // 移除大动物
-        // this.big_zoo_content.removeAllChildren();
     },
 
     onShowBigZooIndex: function (index) { // index 1到34
@@ -932,8 +833,6 @@ cc.Class({
         }.bind(this), interval, repeat, start_delay);
     },
 
-    // 引擎会调用 组件实例.update
-    // dt: 距离上一次刷新过去的时间, dt 计算出游戏世界发生了哪些变化;
     update (dt) {
         if (this.is_running === false) {
             return;
@@ -943,9 +842,6 @@ cc.Class({
         if (this.passed_time > this.move_time) {
             dt -= (this.passed_time - this.move_time);
         }
-
-        // this.running_item.x += (this.vx * dt);
-        // this.running_item.y += (this.vy * dt);
 
         if (this.passed_time >= this.move_time) {
 
