@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "c222146d-8358-4762-8266-df357a6fd8c6",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "qiehuanicon_cheng": {
+      "ver": "1.0.3",
+      "uuid": "9b7cf51f-0510-4598-a469-b75933163004",
+      "rawTextureUuid": "c222146d-8358-4762-8266-df357a6fd8c6",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 77,
+      "height": 33,
+      "rawWidth": 77,
+      "rawHeight": 33,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "6407d18f-80b6-432e-98f3-5911fbf3937a",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "chaxu_icon": {
+      "ver": "1.0.3",
+      "uuid": "7a2dbe14-6e8c-4f7b-9783-bf04f02590fd",
+      "rawTextureUuid": "6407d18f-80b6-432e-98f3-5911fbf3937a",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 111,
+      "height": 43,
+      "rawWidth": 111,
+      "rawHeight": 43,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

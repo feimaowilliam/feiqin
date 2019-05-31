@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "519adfe6-653f-4ba9-8379-f8c4e604861b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "peifu_icon": {
+      "ver": "1.0.3",
+      "uuid": "688110a2-a67d-4d06-a9bb-04da7131039f",
+      "rawTextureUuid": "519adfe6-653f-4ba9-8379-f8c4e604861b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 36,
+      "height": 26,
+      "rawWidth": 36,
+      "rawHeight": 26,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

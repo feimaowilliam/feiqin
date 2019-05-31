@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "c397e2e2-fa8f-4cd7-b35c-daa1ef764c4f",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "qiehuanicon_lan": {
+      "ver": "1.0.3",
+      "uuid": "af2cad16-caf4-4811-9425-8f7ec73772d5",
+      "rawTextureUuid": "c397e2e2-fa8f-4cd7-b35c-daa1ef764c4f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 77,
+      "height": 33,
+      "rawWidth": 77,
+      "rawHeight": 33,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

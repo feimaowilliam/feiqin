@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "007f4edb-a448-48f4-8eb6-604f40bdb4ee",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "kongque": {
+      "ver": "1.0.3",
+      "uuid": "75dffd2d-f05d-45f4-a00d-ea32bf234b9f",
+      "rawTextureUuid": "007f4edb-a448-48f4-8eb6-604f40bdb4ee",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 468,
+      "height": 381,
+      "rawWidth": 468,
+      "rawHeight": 381,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
